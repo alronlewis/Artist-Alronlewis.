@@ -12,7 +12,7 @@
         color: #222;
     }
     header {
-        background: url('commission cover2.jpg') center/cover no-repeat;
+        background: url('commission cover3.jpg') center/cover no-repeat;
         padding: 60px 20px;
         text-align: center;
         
@@ -66,7 +66,18 @@
     100% { background-position: 0% 50%; }
 }
 
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
 
+.section-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
 
     .price-card h3 {
         margin: 0;
@@ -121,8 +132,230 @@
     list-style: disc;
     padding-left: 20px;
 }
+/* ===============================
+   AVAILABLE ARTWORK SECTION
+================================= */
 
-    /* Contact Links */
+.sale-section {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.sale-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: stretch;   /* Equal height */
+}
+
+/* ===============================
+   SALE CARD
+================================= */
+
+.sale-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 25px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+    position: relative; /* IMPORTANT for ribbon */
+    overflow: hidden;   /* keeps ribbon clean */
+}
+
+.sale-card:hover {
+    transform: translateY(-8px);
+}
+
+.sale-card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* ===============================
+   PRICE & DETAILS
+================================= */
+
+.sale-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 10px 0 20px;
+}
+
+.product-details {
+    text-align: left;
+    margin: 15px 0 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 12px;
+}
+
+.product-details p {
+    margin: 6px 0;
+}
+
+.product-details strong {
+    color: #000;
+}
+
+/* ===============================
+   QUOTE
+================================= */
+
+.art-quote {
+    font-style: italic;
+    font-size: 1rem;
+    color: #222;
+    opacity: 0.75;
+    margin: 8px 0 15px;
+}
+
+.art-quote::before {
+    content: "— ";
+}
+
+/* ===============================
+   BUTTONS
+================================= */
+
+.buy-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: rgb(0, 255, 234);
+    color: #222;
+}
+
+/* ===============================
+   SLIDER
+================================= */
+
+.art-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.art-slider img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 18px;
+    transition: opacity 0.3s ease;
+}
+
+/* ===============================
+   ARROWS
+================================= */
+
+.arrow {
+    position: absolute;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 22px;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.arrow:hover {
+    background: #aacaff;
+    color: #222;
+}
+
+.left { left: 10px; }
+.right { right: 10px; }
+
+/* ===============================
+   COMING SOON CARD
+================================= */
+
+.coming-soon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ribbon */
+.coming-soon::after {
+    content: "COMING SOON";
+    position: absolute;
+    top: 20px;
+    right: -45px;
+    background: #aacaff;
+    color: #222;
+    padding: 6px 60px;
+    transform: rotate(45deg);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Optional label under image */
+.coming-label {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: #222;
+    color: white;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+/* Preview Text */
+.preview-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 15px;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+ /* Contact Links */
     .contact {
         text-align: center;
         margin-top: 30px;
@@ -190,17 +423,21 @@
         footer a:hover {
             color: #ffd700;
         }
+        html {
+    scroll-behavior: smooth;
+}
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Custom Face Portraits</h1>
+    <h1>Commissions & Artwork Sales</h1>
     <p>Bring Your Memories to Life</p>
 </header>
 
 <section>
-    <h2 style="text-align:center;">Commission Pricing</h2>
+    <h2 class="section-title">Custom Portrait Commissions</h2>
+<p class="section-subtitle">Choose your size and bring your memories to life.</p>
     <div class="pricing">
         <div class="price-card">
             <h3>A5</h3>
@@ -222,7 +459,7 @@
 </section>
 
 <section>
-    <h2 style="text-align:center;">Sample Showcase</h2>
+    <h2  class="section-title">Sample Showcase</h2>
     <div class="showcase">
         <img src="cat.jpg" alt="Sample Portrait 1">
         <img src="Sharukh Khan.jpg" alt="Sample Portrait 2">
@@ -230,25 +467,84 @@
     </div>
 </section>
 <section class="terms-section">
-    <h2>Terms & Conditions</h2>
+   <h2 class="section-title">Commission Terms & Conditions</h2>
     <ul>
         <li>All artworks are created in the unique style; no exact copies of other artists' works will be made.</li>
         <li>50% advance payment is required to confirm your order.</li>
         <li>Prices may vary depending on complexity, special requests, or urgency.</li>
         <li>Completion time depends on size and complexity confirmation; delays may occur for detailed works.</li>
-        <li>No refunds after the work has been started unless agreed otherwise.</li>
+        <li>No refunds after the work has been started .</li>
         <li>Customer is responsible for providing clear reference images for best results.</li>
         <li>Minor revisions are free, but major changes after final approval may incur extra charges.</li>
         <li>Artwork will be delivered in physical format; shipping charges may apply.</li>
         <li>Artwork may be shared by the artist on social media or portfolio unless the client requests otherwise.</li>
     </ul>
 </section>
-
 <section class="contact">
     <h2>Order Now</h2>
     <a href="https://wa.me/917208236977">📞 WhatsApp</a>
     <a href="https://instagram.com/artist_alron.lewis">📷 Instagram</a>
     <a href="contact.html">📧 Email</a>
+</section>
+<section class="sale-section" id="sale">
+    <h2 class="section-title">Original Artwork Collection</h2>
+<p class="section-subtitle">Available originals – limited pieces.</p>
+
+    <div class="sale-grid">
+
+        <!-- AVAILABLE ARTWORK -->
+        <div class="sale-card">
+
+            <div class="art-slider">
+                <button class="arrow left" onclick="prevSlide(event)">❮</button>
+
+                <img id="artImage" src="owl 3.jpg" alt="Owl Artwork">
+                
+                <button class="arrow right" onclick="nextSlide(event)">❯</button>
+                
+            </div>
+               <p class="preview-text">Click to preview image</p>
+            <h3>Owl</h3>
+            <p class="art-quote">“Wisdom doesn’t speak. It watches.”</p>
+            <p class="sale-price">₹600</p>
+
+            <div class="product-details">
+                <p><strong>Size:</strong> A4 (Framed)</p>
+                <p><strong>Medium:</strong> Charcoal on Paper</p>
+                <p><strong>Finish:</strong> Protective Spray Coated</p>
+                <p><strong>Availability:</strong> 1 Original Piece</p>
+                <p><strong>Delivery:</strong> Ships within 3–5 days</p>
+            </div>
+
+            <div class="button-group">
+                <a href="https://wa.me/917208236977?text=Hi%20I%20want%20to%20buy%20the%20Owl%20artwork"
+                   class="buy-btn whatsapp">WhatsApp</a>
+
+                <a href="mailto:alronlewis01@gmail.com?subject=Artwork Purchase - Owl&body=Hi Alron,%0D%0A%0D%0AI would like to purchase the Owl artwork.%0D%0AShipping Address:%0D%0AContact Number:%0D%0AThank you."
+                   class="buy-btn email">Email</a>
+            </div>
+
+        </div>
+
+
+        <!-- COMING SOON 1 -->
+        <div class="sale-card coming-soon">
+            <img src="upcoming1.jpg" alt="Upcoming Artwork">
+            <h3>Untitled Series I</h3>
+            <!--<p class="art-quote">“Silence holds the loudest truths.”</p>-->
+            <p class="coming-label">Coming Soon</p>
+        </div>
+
+
+        <!-- COMING SOON 2 -->
+        <div class="sale-card coming-soon">
+            <img src="upcoming2.jpg" alt="Upcoming Artwork">
+            <h3>Untitled Series II</h3>
+            <!--<p class="art-quote">“Eyes that remember.”</p>-->
+            <p class="coming-label">Coming Soon</p>
+        </div>
+
+    </div>
 </section>
 
 <a href="index.html" class="home-btn">🏠 Back to Home</a>
@@ -262,6 +558,67 @@
         <a href="terms.html">Privacy Policy & Rights</a>
      </p>
 </footer>
+<div class="lightbox" id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="">
+</div>
+<script>
+/* ======================
+   IMAGE SLIDER
+====================== */
 
+const imageList = [
+    "Owl.jpg",
+    "Owl 2.jpg",
+    "Owl 3.jpg"
+];
+
+let currentIndex = 0;
+const artImage = document.getElementById("artImage");
+
+function showImage(index) {
+    artImage.style.opacity = 0;
+    setTimeout(() => {
+        artImage.src = imageList[index];
+        artImage.style.opacity = 1;
+    }, 200);
+}
+
+function nextSlide(event) {
+    event.stopPropagation();
+    currentIndex = (currentIndex + 1) % imageList.length;
+    showImage(currentIndex);
+}
+
+function prevSlide(event) {
+    event.stopPropagation();
+    currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+    showImage(currentIndex);
+}
+
+
+/* ======================
+   LIGHTBOX PREVIEW
+====================== */
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-lightbox');
+
+artImage.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = artImage.src;
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+lightbox.addEventListener('click', (e) => {
+    if (e.target !== lightboxImg) {
+        lightbox.style.display = 'none';
+    }
+});
+</script>
 </body>
 </html>
