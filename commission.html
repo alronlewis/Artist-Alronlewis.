@@ -48,6 +48,19 @@
         flex: 1 1 250px;
         text-align: center;
     }
+    .size {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+    margin: 6px 0;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 14px 0 8px;
+}
+
     /* Price Card Animation */
     /* Floating + Color Change Animation */
 .price-card {
@@ -88,7 +101,7 @@
         font-weight: bold;
         margin: 10px 0;
     }
-    .offer {
+     .offer {
         background: #ffefc1;
         border-left: 5px solid #ff9900;
         padding: 15px;
@@ -114,6 +127,26 @@
     .showcase img:hover {
         transform: scale(1.05);
     }
+    .previous-works {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.drive-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.drive-btn:hover {
+    background: #aacaff;
+    color: #222;
+}
     .terms-section {
     max-width: 800px;
     margin: 40px auto;
@@ -438,23 +471,34 @@
 <section>
     <h2 class="section-title">Custom Portrait Commissions</h2>
 <p class="section-subtitle">Choose your size and bring your memories to life.</p>
-    <div class="pricing">
-        <div class="price-card">
-            <h3>A5</h3>
-            <p class="price">₹300 – ₹500</p>
-        </div>
-        <div class="price-card">
-            <h3>A4</h3>
-            <p class="price">₹450 – ₹600</p>
-        </div>
-        <div class="price-card">
-            <h3>A3</h3>
-            <p class="price">₹550 – ₹800</p>
-        </div>
+   <div class="pricing">
+
+    <div class="price-card">
+        <h3>A5</h3>
+        <p class="size">5.83 × 8.27 in | 14.8 × 21 cm</p>
+        <p class="price">₹300 / ₹500</p>
+        <p class="frame-label">Without Frame / With Frame</p>
     </div>
 
+    <div class="price-card">
+        <h3>A4</h3>
+        <p class="size">8.27 × 11.69 in | 21 × 29.7 cm</p>
+        <p class="price">₹450 / ₹600</p>
+        <p class="frame-label">Without Frame / With Frame</p>
+    </div>
+
+    <div class="price-card">
+        <h3>A3</h3>
+        <p class="size">11.69 × 16.54 in | 29.7 × 42 cm</p>
+        <p class="price">₹550 / ₹800</p>
+        <p class="frame-label">Without Frame / With Frame</p>
+    </div>
+
+</div>
+</div>
+
     <div class="offer">
-        Introductory Offer: Get ₹100 off your first order!
+    <strong>Note:</strong> The above prices are for a single-face portrait. Additional faces may incur extra charges.
     </div>
 </section>
 
@@ -465,6 +509,18 @@
         <img src="Sharukh Khan.jpg" alt="Sample Portrait 2">
         <img src="C57OENPiBcZ.jpg" alt="Sample Portrait 3">
     </div>
+</section>
+<section class="previous-works">
+    <h2 class="section-title">Previous Commission Works</h2>
+    <p class="section-subtitle">
+        Explore artworks created for previous commissions.
+    </p>
+
+    <a href="https://drive.google.com/drive/folders/1ja8bpjhmxZYd0E2uWKOsKzi7j4VE2Olj?usp=sharing"
+       target="_blank"
+       class="drive-btn">
+        🔗 View Previous Commission Works
+    </a>
 </section>
 <section class="terms-section">
    <h2 class="section-title">Commission Terms & Conditions</h2>
@@ -526,23 +582,21 @@
 
         </div>
 
-
-        <!-- COMING SOON 1 -->
+        <!-- COMING SOON 1       
         <div class="sale-card coming-soon">
             <img src="upcoming1.jpg" alt="Upcoming Artwork">
             <h3>Untitled Series I</h3>
-            <!--<p class="art-quote">“Silence holds the loudest truths.”</p>-->
-            <p class="coming-label">Coming Soon</p>
-        </div>
-
+            <p class="art-quote">“Silence holds the loudest truths.”</p>-->
+      <!--  <p class="coming-label">Coming Soon</p>
+        </div> -->
 
         <!-- COMING SOON 2 -->
-        <div class="sale-card coming-soon">
+ <!-- <div class="sale-card coming-soon">
             <img src="upcoming2.jpg" alt="Upcoming Artwork">
             <h3>Untitled Series II</h3>
-            <!--<p class="art-quote">“Eyes that remember.”</p>-->
-            <p class="coming-label">Coming Soon</p>
-        </div>
+            <!- class="art-quote">“Eyes that remember.”</p>-->
+        <!-- <p class="coming-label">Coming Soon</p>
+        </div>  -->
 
     </div>
 </section>
