@@ -1236,6 +1236,59 @@ footer a{color:#ddd}
 }
 
 </style>
+<style id="about-gallery-visibility-fix">
+
+/* FIX ABOUT PORTRAIT: SHOW THE FULL PHOTO WITHOUT CROPPING */
+.about-visual{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+}
+.about-visual img{
+  width:100%!important;
+  height:100%!important;
+  max-height:480px!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  border-radius:18px!important;
+}
+/* KEEP THE GALLERY TEXT LEGIBLE ON ITS DARK STEEL CARD */
+.gallery-card,
+.gallery-card h2,
+.gallery-card p,
+.gallery-card .gallery-footer p{
+  color:#f3f1ec!important;
+  -webkit-text-fill-color:#f3f1ec!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.gallery-card h2{
+  background:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  text-shadow:none!important;
+}
+.gallery-card .gallery-footer p{
+  color:#c3cbd2!important;
+  -webkit-text-fill-color:#c3cbd2!important;
+}
+.gallery-card .gallery-more-link{
+  color:#111519!important;
+  -webkit-text-fill-color:#111519!important;
+}
+@media(max-width:767px){
+  .about-visual{height:auto!important;min-height:0!important}
+  .about-visual img{
+    width:100%!important;
+    height:auto!important;
+    max-height:440px!important;
+    object-fit:contain!important;
+  }
+}
+
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
@@ -1402,7 +1455,6 @@ footer a{color:#ddd}
         A showcase of my journey — each piece tells a story beyond the paper.
       </h2>
 
-      <div class="gallery-eyebrow"><span></span> SELECTED WORKS · 2020—PRESENT</div>
       <div class="row g-4 gallery">
         <div class="col-md-4">
           <img src="Jeremy Renner.jpg" alt="Jeremy Renner portrait artwork by Alron Lewis" class="img-fluid">
