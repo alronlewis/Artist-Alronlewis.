@@ -406,8 +406,6 @@
 #alron-intro .intro-center{position:relative;z-index:2;width:min(90%,760px);text-align:center}
 #alron-intro .intro-mark{width:min(68vw,390px);display:block;margin:0 auto 18px;overflow:visible}
 #alron-intro .intro-path{fill:none;stroke:#292824;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));animation:alronDraw 3.1s cubic-bezier(.55,.05,.3,1) .35s forwards}
-#alron-intro .intro-pencil{position:absolute;width:62px;height:13px;top:31%;left:calc(50% - 31px);border-radius:3px;background:linear-gradient(90deg,#292929,#8a8985,#262626);opacity:0;transform:rotate(-34deg);animation:alronPencil 3.1s ease .35s forwards}
-#alron-intro .intro-pencil:before{content:"";position:absolute;left:-13px;top:0;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;border-right:14px solid #b9aa91}
 #alron-intro .intro-name{font:400 clamp(2.5rem,8vw,5.6rem)/1.05 Georgia,serif;letter-spacing:.015em;margin:0;opacity:0;transform:translateY(12px);animation:alronReveal .9s ease 3.25s forwards}
 #alron-intro .intro-tag{font:500 11px Arial,sans-serif;letter-spacing:.36em;margin-top:17px;opacity:0;animation:alronReveal .9s ease 4s forwards}
 #alron-intro .intro-skip{position:absolute;z-index:3;right:22px;top:20px;border:1px solid rgba(30,30,30,.35);background:transparent;color:inherit;padding:9px 13px;border-radius:30px;font:10px Arial,sans-serif;letter-spacing:.16em;cursor:pointer}
@@ -453,7 +451,6 @@
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
   <div class="intro-center">
-    <div class="intro-pencil" aria-hidden="true"></div>
     <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Hand-drawn infinity symbol">
       <path class="intro-path" d="M160 85 C121 24 53 26 53 85 C53 144 121 146 160 85 C199 24 267 26 267 85 C267 144 199 146 160 85"/>
     </svg>
