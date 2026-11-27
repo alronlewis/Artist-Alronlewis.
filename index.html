@@ -1289,6 +1289,26 @@ footer a{color:#ddd}
 }
 
 </style>
+<style id="intro-sound-control-style">
+
+/* INTRO SOUND CONTROL */
+#alron-intro .intro-sound{
+  position:absolute;z-index:4;left:22px;top:20px;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 13px;border:1px solid rgba(30,30,30,.28);
+  border-radius:30px;background:rgba(255,255,255,.16);
+  color:inherit;font:10px Arial,sans-serif;letter-spacing:.14em;
+  cursor:pointer;backdrop-filter:blur(8px);
+  transition:background .25s ease,border-color .25s ease,transform .25s ease;
+}
+#alron-intro .intro-sound:hover{background:rgba(255,255,255,.32);border-color:currentColor;transform:translateY(-2px)}
+#alron-intro.intro-finale .intro-sound{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07)}
+@media(max-width:600px){
+  #alron-intro .intro-sound{left:14px;top:14px;padding:8px 10px;font-size:9px}
+  #alron-intro .intro-skip{right:14px;top:14px}
+}
+
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
@@ -1301,6 +1321,7 @@ footer a{color:#ddd}
 <div id="alron-intro" aria-label="Alron Lewis — Zero to Infinite introduction">
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
+  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>SOUND ON</span></button>
   <div class="intro-center">
     <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Liquid steel infinity symbol">
       <defs>
@@ -1537,17 +1558,115 @@ footer a{color:#ddd}
   if (!intro) return;
   let alreadySeen = false;
   try { alreadySeen = sessionStorage.getItem("alronIntroSeen") === "yes"; } catch(e) {}
+  let audioCtx = null, masterGain = null, chordTimer = null, musicPlaying = false;
+  let activeVoices = [];
+  const soundButton = intro.querySelector(".intro-sound");
+  const soundLabel = soundButton.querySelector("span");
+  const chords = [
+    [130.81,196.00,261.63,329.63,392.00],
+    [110.00,164.81,220.00,261.63,329.63],
+    [87.31,130.81,174.61,220.00,261.63],
+    [98.00,146.83,196.00,246.94,293.66]
+  ];
+  let chordIndex = 0;
+
+  function setSoundLabel(text){ soundLabel.textContent = text; }
+  function playChord(){
+    if (!audioCtx || !masterGain || !musicPlaying) return;
+    const now = audioCtx.currentTime;
+    activeVoices.forEach(function(voice){
+      try{
+        voice.gain.gain.cancelScheduledValues(now);
+        voice.gain.gain.setTargetAtTime(0,now,.45);
+        voice.osc.stop(now+2.2);
+      }catch(e){}
+    });
+    activeVoices = [];
+    const notes = chords[chordIndex % chords.length];
+    chordIndex++;
+    notes.forEach(function(freq,index){
+      const osc = audioCtx.createOscillator();
+      const voiceGain = audioCtx.createGain();
+      osc.type = index === 0 ? "sine" : "triangle";
+      osc.frequency.value = freq;
+      voiceGain.gain.setValueAtTime(0,now);
+      voiceGain.gain.linearRampToValueAtTime(index === 0 ? .16 : .055,now+1.8);
+      voiceGain.gain.setTargetAtTime(0,now+4.2,1.1);
+      osc.connect(voiceGain);
+      voiceGain.connect(masterGain);
+      osc.start(now);
+      osc.stop(now+7);
+      activeVoices.push({osc:osc,gain:voiceGain});
+    });
+    // A very soft upper harmonic gives the pad a gentle, glass-like shimmer.
+    const shimmer = audioCtx.createOscillator();
+    const shimmerGain = audioCtx.createGain();
+    shimmer.type = "sine";
+    shimmer.frequency.value = notes[3]*2;
+    shimmerGain.gain.setValueAtTime(0,now);
+    shimmerGain.gain.linearRampToValueAtTime(.012,now+2.4);
+    shimmerGain.gain.setTargetAtTime(0,now+4.4,1.2);
+    shimmer.connect(shimmerGain);
+    shimmerGain.connect(masterGain);
+    shimmer.start(now);
+    shimmer.stop(now+7);
+    activeVoices.push({osc:shimmer,gain:shimmerGain});
+  }
+  async function startMusic(){
+    try{
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) { setSoundLabel("AUDIO UNAVAILABLE"); return; }
+      if (!audioCtx){
+        audioCtx = new AudioContextClass();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0;
+        masterGain.connect(audioCtx.destination);
+      }
+      await audioCtx.resume();
+      const now = audioCtx.currentTime;
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setTargetAtTime(.72,now,.9);
+      musicPlaying = true;
+      playChord();
+      if (chordTimer) clearInterval(chordTimer);
+      chordTimer = window.setInterval(playChord,5600);
+      setSoundLabel("SOUND ON");
+    }catch(e){
+      setSoundLabel("TAP FOR SOUND");
+    }
+  }
+  function stopMusic(){
+    musicPlaying = false;
+    if (chordTimer) { clearInterval(chordTimer); chordTimer = null; }
+    if (audioCtx && masterGain){
+      const now = audioCtx.currentTime;
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setTargetAtTime(0,now,.22);
+      window.setTimeout(function(){
+        if (audioCtx && audioCtx.state !== "closed") audioCtx.close().catch(function(){});
+        audioCtx = null; masterGain = null; activeVoices = [];
+      },1100);
+    }
+    setSoundLabel("SOUND OFF");
+  }
   function closeIntro(){
     if (!intro || intro.classList.contains("intro-leave")) return;
+    stopMusic();
     intro.classList.add("intro-leave");
-    setTimeout(function(){ intro.remove(); }, 1250);
+    setTimeout(function(){ intro.remove(); },1250);
   }
   if (alreadySeen) { intro.remove(); return; }
   try { sessionStorage.setItem("alronIntroSeen","yes"); } catch(e) {}
-  intro.querySelector(".intro-skip").addEventListener("click", closeIntro);
-  intro.querySelector(".intro-enter").addEventListener("click", closeIntro);
-  window.setTimeout(function(){ intro.classList.add("intro-finale"); }, 4800);
-  window.setTimeout(closeIntro, 7200);
+  soundButton.addEventListener("click",function(event){
+    event.stopPropagation();
+    if (musicPlaying) stopMusic(); else startMusic();
+  });
+  intro.querySelector(".intro-skip").addEventListener("click",closeIntro);
+  intro.querySelector(".intro-enter").addEventListener("click",closeIntro);
+  // Try gentle autoplay; browsers that block it show a one-tap sound control.
+  startMusic();
+  window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
+  window.setTimeout(closeIntro,7200);
 })();
 </script>
 
