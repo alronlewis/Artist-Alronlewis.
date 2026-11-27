@@ -1321,7 +1321,7 @@ footer a{color:#ddd}
 <div id="alron-intro" aria-label="Alron Lewis — Zero to Infinite introduction">
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
-  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>TAP FOR SOUND</span></button>
+  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>SOUND</span></button>
   <div class="intro-center">
     <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Liquid steel infinity symbol">
       <defs>
@@ -1623,7 +1623,7 @@ footer a{color:#ddd}
         masterGain.connect(audioCtx.destination);
       }
       await audioCtx.resume();
-      if (audioCtx.state !== "running") { setSoundLabel("TAP FOR SOUND"); return; }
+      if (audioCtx.state !== "running") { setSoundLabel("SOUND"); return; }
       const now = audioCtx.currentTime;
       masterGain.gain.cancelScheduledValues(now);
       masterGain.gain.setTargetAtTime(.72,now,.9);
@@ -1662,6 +1662,18 @@ footer a{color:#ddd}
     event.stopPropagation();
     if (musicPlaying) stopMusic(); else startMusic();
   });
+  // Retry automatically on the visitor's first normal interaction if the
+  // browser blocks audible autoplay. No separate "tap for sound" prompt.
+  let firstGestureHandled = false;
+  function resumeAfterGesture(){
+    if (firstGestureHandled || musicPlaying || !document.getElementById("alron-intro")) return;
+    firstGestureHandled = true;
+    startMusic();
+    document.removeEventListener("pointerdown",resumeAfterGesture,true);
+    document.removeEventListener("keydown",resumeAfterGesture,true);
+  }
+  document.addEventListener("pointerdown",resumeAfterGesture,true);
+  document.addEventListener("keydown",resumeAfterGesture,true);
   intro.querySelector(".intro-skip").addEventListener("click",closeIntro);
   intro.querySelector(".intro-enter").addEventListener("click",closeIntro);
   // Try gentle autoplay; browsers that block it show a one-tap sound control.
