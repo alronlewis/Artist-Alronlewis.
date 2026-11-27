@@ -1589,29 +1589,28 @@ footer a{color:#ddd}
     shimmer.stop(now+7);
     activeVoices.push({osc:shimmer,gain:shimmerGain});
   }
-  async function startMusic(){
+  function startMusic(){
     try{
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContextClass) { setSoundLabel("AUDIO UNAVAILABLE"); return; }
+      if (!AudioContextClass) return;
       if (!audioCtx){
         audioCtx = new AudioContextClass();
         masterGain = audioCtx.createGain();
         masterGain.gain.value = 0;
         masterGain.connect(audioCtx.destination);
       }
-      await audioCtx.resume();
-      if (audioCtx.state !== "running") { setSoundLabel("SOUND"); return; }
-      const now = audioCtx.currentTime;
-      masterGain.gain.cancelScheduledValues(now);
-      masterGain.gain.setTargetAtTime(.72,now,.9);
-      musicPlaying = true;
-      playChord();
-      if (chordTimer) clearInterval(chordTimer);
-      chordTimer = window.setInterval(playChord,5600);
-      setSoundLabel("SOUND ON");
-    }catch(e){
-      setSoundLabel("TAP FOR SOUND");
-    }
+      // Resume is invoked directly during the trusted user gesture.
+      audioCtx.resume().then(function(){
+        if (!audioCtx || audioCtx.state !== "running" || musicPlaying) return;
+        const now = audioCtx.currentTime;
+        masterGain.gain.cancelScheduledValues(now);
+        masterGain.gain.setTargetAtTime(.72,now,.35);
+        musicPlaying = true;
+        playChord();
+        if (chordTimer) clearInterval(chordTimer);
+        chordTimer = window.setInterval(playChord,5600);
+      }).catch(function(){});
+    }catch(e){}
   }
   function stopMusic(){
     musicPlaying = false;
@@ -1641,23 +1640,17 @@ footer a{color:#ddd}
   let firstGestureHandled = false;
   function resumeAfterGesture(){
     if (firstGestureHandled || musicPlaying || !document.getElementById("alron-intro")) return;
-    // Browser-approved user gesture: resume audio immediately in this event.
-    startMusic().then(function(){
-      if (musicPlaying) {
-        firstGestureHandled = true;
-        document.removeEventListener("pointerdown",resumeAfterGesture,true);
-        document.removeEventListener("keydown",resumeAfterGesture,true);
-      }
-    });
+    firstGestureHandled = true;
+    startMusic();
+    document.removeEventListener("pointerdown",resumeAfterGesture,true);
+    document.removeEventListener("keydown",resumeAfterGesture,true);
   }
   document.addEventListener("pointerdown",resumeAfterGesture,true);
   document.addEventListener("keydown",resumeAfterGesture,true);
   intro.querySelector(".intro-skip").addEventListener("click",closeIntro);
   intro.querySelector(".intro-enter").addEventListener("click",closeIntro);
-  // Attempt audible autoplay; if blocked, start on the first visitor interaction.
-  startMusic();
+  // Browsers block sound autoplay. Start on the first tap/key and keep the intro open until Enter or Skip.
   window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
-  window.setTimeout(closeIntro,7200);
 })();
 </script>
 
