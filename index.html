@@ -1289,26 +1289,6 @@ footer a{color:#ddd}
 }
 
 </style>
-<style id="intro-sound-control-style">
-
-/* INTRO SOUND CONTROL */
-#alron-intro .intro-sound{
-  position:absolute;z-index:4;left:22px;top:20px;
-  display:inline-flex;align-items:center;gap:8px;
-  padding:9px 13px;border:1px solid rgba(30,30,30,.28);
-  border-radius:30px;background:rgba(255,255,255,.16);
-  color:inherit;font:10px Arial,sans-serif;letter-spacing:.14em;
-  cursor:pointer;backdrop-filter:blur(8px);
-  transition:background .25s ease,border-color .25s ease,transform .25s ease;
-}
-#alron-intro .intro-sound:hover{background:rgba(255,255,255,.32);border-color:currentColor;transform:translateY(-2px)}
-#alron-intro.intro-finale .intro-sound{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07)}
-@media(max-width:600px){
-  #alron-intro .intro-sound{left:14px;top:14px;padding:8px 10px;font-size:9px}
-  #alron-intro .intro-skip{right:14px;top:14px}
-}
-
-</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
@@ -1321,7 +1301,6 @@ footer a{color:#ddd}
 <div id="alron-intro" aria-label="Alron Lewis — Zero to Infinite introduction">
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
-  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>SOUND</span></button>
   <div class="intro-center">
     <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Liquid steel infinity symbol">
       <defs>
@@ -1560,8 +1539,6 @@ footer a{color:#ddd}
   try { alreadySeen = sessionStorage.getItem("alronIntroSeen") === "yes"; } catch(e) {}
   let audioCtx = null, masterGain = null, chordTimer = null, musicPlaying = false;
   let activeVoices = [];
-  const soundButton = intro.querySelector(".intro-sound");
-  const soundLabel = soundButton.querySelector("span");
   const chords = [
     [130.81,196.00,261.63,329.63,392.00],
     [110.00,164.81,220.00,261.63,329.63],
@@ -1570,7 +1547,7 @@ footer a{color:#ddd}
   ];
   let chordIndex = 0;
 
-  function setSoundLabel(text){ soundLabel.textContent = text; }
+  function setSoundLabel(text){ /* Sound control intentionally hidden. */ }
   function playChord(){
     if (!audioCtx || !masterGain || !musicPlaying) return;
     const now = audioCtx.currentTime;
@@ -1658,10 +1635,6 @@ footer a{color:#ddd}
   }
   if (alreadySeen) { intro.remove(); return; }
   try { sessionStorage.setItem("alronIntroSeen","yes"); } catch(e) {}
-  soundButton.addEventListener("click",function(event){
-    event.stopPropagation();
-    if (musicPlaying) stopMusic(); else startMusic();
-  });
   // Retry automatically on the visitor's first normal interaction if the
   // browser blocks audible autoplay. No separate "tap for sound" prompt.
   let firstGestureHandled = false;
@@ -1676,7 +1649,7 @@ footer a{color:#ddd}
   document.addEventListener("keydown",resumeAfterGesture,true);
   intro.querySelector(".intro-skip").addEventListener("click",closeIntro);
   intro.querySelector(".intro-enter").addEventListener("click",closeIntro);
-  // Try gentle autoplay; browsers that block it show a one-tap sound control.
+  // Attempt audible autoplay; if blocked, start on the first visitor interaction.
   startMusic();
   window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
   window.setTimeout(closeIntro,7200);
