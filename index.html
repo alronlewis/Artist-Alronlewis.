@@ -972,6 +972,107 @@ footer a{color:#ddd}
 }
 
 </style>
+
+<style id="about-me-loop-motion">
+/* ABOUT ME — subtle continuous motion */
+.about-card{
+  position:relative!important;
+  isolation:isolate!important;
+  background:linear-gradient(125deg,#252a30 0%,#171a1e 52%,#292d32 100%)!important;
+}
+.about-card:after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:340px;height:340px;
+  right:-130px;top:-170px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(190,207,220,.17),rgba(120,145,160,.055) 42%,transparent 70%);
+  filter:blur(4px);
+  pointer-events:none;
+  animation:aboutAuraDrift 9s ease-in-out infinite alternate;
+}
+.about-card:before{
+  content:"";
+  position:absolute;z-index:3;pointer-events:none;
+  top:0;left:-55%;width:38%;height:100%;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.055),rgba(255,255,255,.13),transparent);
+  animation:aboutCardSheen 8s ease-in-out infinite;
+}
+.about-visual{
+  position:relative!important;
+  z-index:1!important;
+  overflow:hidden!important;
+}
+.about-visual:after{
+  content:"";
+  position:absolute;inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 25%,rgba(210,225,235,.11) 48%,transparent 68%);
+  transform:translateX(-120%);
+  animation:aboutPortraitGlint 7s ease-in-out infinite;
+}
+.about-visual img{
+  transform-origin:50% 55%;
+  animation:aboutPortraitFloat 6s ease-in-out infinite;
+  will-change:transform;
+}
+.about-content{
+  position:relative!important;
+  z-index:2!important;
+}
+.about-content h2{
+  background:linear-gradient(100deg,#f6f4ef 0%,#f6f4ef 38%,#b8c6d0 50%,#f6f4ef 63%,#f6f4ef 100%);
+  background-size:220% 100%;
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:aboutTitleMetal 8s linear infinite;
+}
+.about-content p{
+  animation:aboutCopyBreath 7s ease-in-out infinite;
+}
+@keyframes aboutAuraDrift{
+  0%{transform:translate(-35px,12px) scale(.88);opacity:.55}
+  100%{transform:translate(-125px,105px) scale(1.18);opacity:1}
+}
+@keyframes aboutCardSheen{
+  0%,58%{left:-55%;opacity:0}
+  66%{opacity:.8}
+  82%{left:125%;opacity:0}
+  100%{left:125%;opacity:0}
+}
+@keyframes aboutPortraitGlint{
+  0%,48%{transform:translateX(-120%);opacity:0}
+  58%{opacity:1}
+  78%,100%{transform:translateX(120%);opacity:0}
+}
+@keyframes aboutPortraitFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.012)}
+}
+@keyframes aboutTitleMetal{
+  0%{background-position:100% 50%}
+  100%{background-position:-120% 50%}
+}
+@keyframes aboutCopyBreath{
+  0%,100%{opacity:.92}
+  50%{opacity:1}
+}
+.about-card:hover .about-visual img{
+  animation-play-state:paused;
+  transform:scale(1.045)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .about-card:before,.about-card:after,.about-visual:after,
+  .about-visual img,.about-content h2,.about-content p{
+    animation:none!important;
+  }
+}
+</style>
+
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
