@@ -1152,6 +1152,90 @@ footer a{color:#ddd}
 }
 
 </style>
+<style id="gallery-feature-card-style">
+
+/* GALLERY FEATURE CARD — MATCH THE ARTWORK-FOR-SALE FINISH */
+.gallery-section{background:#0b0b0c!important;padding-top:3.5rem!important;padding-bottom:3.5rem!important}
+.gallery-card{
+  position:relative!important;
+  isolation:isolate!important;
+  max-width:1100px!important;
+  width:100%!important;
+  margin:0 auto!important;
+  padding:clamp(24px,4vw,42px)!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+  color:#f2f3f4!important;
+  background:linear-gradient(135deg,#292d34 0%,#191c21 54%,#252a30 100%)!important;
+  border:1px solid rgba(220,230,240,.2)!important;
+  box-shadow:0 22px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  transition:transform .4s ease,box-shadow .4s ease!important;
+}
+.gallery-card:before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,#9daab5,#fff,#7c8994,transparent);
+  opacity:.9;pointer-events:none;
+}
+.gallery-card:after{
+  content:"";position:absolute;z-index:-1;width:360px;height:360px;right:-170px;bottom:-240px;
+  border-radius:50%;background:radial-gradient(circle,rgba(173,191,207,.12),transparent 70%);
+  pointer-events:none;
+}
+.gallery-card:hover{transform:translateY(-5px);box-shadow:0 32px 80px rgba(0,0,0,.56),inset 0 1px 0 rgba(255,255,255,.16)!important}
+.gallery-card h2{
+  position:relative;z-index:1;
+  max-width:900px;margin:0 auto 30px!important;
+  color:#f6f4ef!important;
+  font:400 clamp(1.45rem,3vw,2.25rem)/1.3 Georgia,serif!important;
+  letter-spacing:-.02em;
+}
+.gallery-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:0 0 18px;color:#aeb9c3;font:10px Arial,sans-serif;letter-spacing:.2em;
+}
+.gallery-eyebrow span{width:6px;height:6px;border-radius:50%;background:#d8e0e6;box-shadow:0 0 12px rgba(216,224,230,.5)}
+.gallery .col-md-4{position:relative}
+.gallery img{
+  display:block;width:100%;height:clamp(220px,27vw,320px);object-fit:cover;
+  border-radius:16px!important;border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 12px 28px rgba(0,0,0,.3)!important;
+  transition:transform .5s cubic-bezier(.2,.75,.25,1),filter .5s ease,border-color .5s ease!important;
+}
+.gallery img:hover{
+  transform:translateY(-7px) scale(1.025)!important;
+  filter:brightness(1.08)!important;border-color:rgba(230,239,246,.38);
+  box-shadow:0 20px 38px rgba(0,0,0,.42)!important;
+}
+.gallery-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+}
+.gallery-footer p{margin:0;color:#aeb6bd;font-size:13px;line-height:1.6}
+.gallery-more-link{
+  display:inline-flex;align-items:center;gap:22px;position:relative;
+  padding:13px 17px;background:#e9edf0;color:#111519;text-decoration:none;
+  font:10px Arial,sans-serif;letter-spacing:.13em;white-space:nowrap;
+  transition:all .3s ease;
+}
+.gallery-more-link span{font-size:15px}
+.gallery-more-link small{
+  padding-left:14px;border-left:1px solid rgba(17,21,25,.2);
+  font-size:9px;letter-spacing:.04em;text-transform:none;
+}
+.gallery-more-link:hover{background:#b8c5ce;color:#080a0c;transform:translateY(-3px);gap:27px}
+@media(max-width:767px){
+  .gallery-card{padding:25px 18px!important;border-radius:22px!important}
+  .gallery-card h2{margin-bottom:24px!important}
+  .gallery img{height:250px;max-height:250px}
+  .gallery-footer{flex-direction:column;align-items:flex-start}
+  .gallery-more-link{max-width:100%;gap:12px;font-size:9px;padding:13px}
+  .gallery-more-link small{padding-left:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gallery-card,.gallery img,.gallery-more-link{transition:none!important}
+}
+
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
@@ -1318,6 +1402,7 @@ footer a{color:#ddd}
         A showcase of my journey — each piece tells a story beyond the paper.
       </h2>
 
+      <div class="gallery-eyebrow"><span></span> SELECTED WORKS · 2020—PRESENT</div>
       <div class="row g-4 gallery">
         <div class="col-md-4">
           <img src="Jeremy Renner.jpg" alt="Jeremy Renner portrait artwork by Alron Lewis" class="img-fluid">
@@ -1328,6 +1413,13 @@ footer a{color:#ddd}
         <div class="col-md-4">
           <img src="DI_WqFEsor4_0.jpg" alt="Portrait artwork by Alron Lewis" class="img-fluid">
         </div>
+      </div>
+      <div class="gallery-footer">
+        <p>There’s more to discover beyond this selection.</p>
+        <a class="gallery-more-link" href="https://www.instagram.com/artist_alron.lewis/" target="_blank" rel="noopener noreferrer">
+          VIEW MORE ON INSTAGRAM <span aria-hidden="true">↗</span>
+          <small>@artist_alron.lewis</small>
+        </a>
       </div>
     </div>
   </div>
