@@ -400,10 +400,10 @@
   }
 
 /* CINEMATIC ZERO TO INFINITE INTRO */
-#alron-intro{position:fixed;inset:0;z-index:100000;background:#e9e5dc;color:#191817;display:grid;place-items:center;overflow:hidden;transition:background 1.1s ease,color 1.1s ease}
+#alron-intro{position:fixed;inset:0;z-index:100000;background:#e9e5dc;color:#191817;display:grid;place-items:center;overflow:hidden;opacity:1;visibility:visible;transition:opacity .95s ease,visibility 0s linear .95s,background 1.1s ease,color 1.1s ease}
 #alron-intro .intro-paper{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,.82),transparent 65%),repeating-linear-gradient(0deg,rgba(70,60,45,.025) 0 1px,transparent 1px 4px),#e9e5dc}
 #alron-intro .intro-grain{position:absolute;inset:0;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E")}
-#alron-intro .intro-center{position:relative;z-index:2;width:min(90%,760px);text-align:center}
+#alron-intro .intro-center{position:relative;z-index:2;width:min(90%,760px);text-align:center;transform:translateY(0) scale(1);transition:opacity .7s ease,transform .7s ease}
 #alron-intro .intro-mark{width:min(68vw,390px);display:block;margin:0 auto 18px;overflow:visible}
 #alron-intro .intro-path{fill:none;stroke:#292824;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));animation:alronDraw 3.1s cubic-bezier(.55,.05,.3,1) .35s forwards}
 #alron-intro .intro-name{font:400 clamp(2.5rem,8vw,5.6rem)/1.05 Georgia,serif;letter-spacing:.015em;margin:0;opacity:0;transform:translateY(12px);animation:alronReveal .9s ease 3.25s forwards}
@@ -415,7 +415,7 @@
 #alron-intro.intro-finale .intro-paper{opacity:0;transition:opacity 1s ease}
 #alron-intro.intro-finale .intro-path{stroke:#eeeae1}
 #alron-intro.intro-finale .intro-tag{color:#c8c4bc}
-#alron-intro.intro-leave{opacity:0;visibility:hidden;pointer-events:none}
+#alron-intro.intro-leave{opacity:0;visibility:hidden;pointer-events:none}#alron-intro.intro-leave .intro-center{opacity:0;transform:translateY(-10px) scale(.985)}
 @keyframes alronDraw{to{stroke-dashoffset:0}}
 @keyframes alronReveal{to{opacity:1;transform:translateY(0)}}
 @keyframes alronPencil{0%{opacity:0;transform:translate(-115px,68px) rotate(-34deg)}12%{opacity:1}82%{opacity:1}100%{opacity:0;transform:translate(115px,-68px) rotate(-34deg)}}
