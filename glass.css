@@ -18,3 +18,40 @@ input,textarea,select{background:rgba(255,255,255,.45)!important;border:1px soli
 input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.62)!important;box-shadow:0 0 0 .2rem rgba(100,120,255,.12),inset 0 1px 0 #fff!important}
 @media(max-width:768px){.about-card,.achievement-card{border-radius:24px!important}.custom-nav,.navbar{backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%)}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* READABILITY + REFINED GLASS CARDS (homepage and shared cards) */
+.about-card,.achievement-card,.gallery-card,.sale-preview-card,.price-card,.sale-card,.terms-section,.contact,.content-section,.card{
+  color:#17191d!important;
+  background:linear-gradient(135deg,rgba(250,251,253,.94),rgba(220,225,232,.86))!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  box-shadow:0 24px 65px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  position:relative;
+}
+.about-card,.achievement-card,.gallery-card{overflow:hidden}
+.about-card:before,.achievement-card:before,.gallery-card:before{
+  content:"";position:absolute;inset:0 0 auto;height:3px;
+  background:linear-gradient(90deg,transparent,#aeb9c4,#fff,#8997a5,transparent);
+  opacity:.9;pointer-events:none
+}
+.about-content h2,.achievement-content h3,.gallery-card h2,
+.about-card h2,.achievement-card h3{color:#11151a!important}
+.about-content p,.achievement-content p,.about-card p,.achievement-card p{
+  color:#303740!important;opacity:1!important
+}
+.about-content strong,.achievement-content strong{color:#101419!important}
+.achievement-year{color:#4b5661!important}
+.sale-preview-label{color:#202832!important}
+.gallery-card .text-center{color:#17191d!important}
+.about-card img{
+  border:5px solid rgba(255,255,255,.9);
+  box-shadow:0 15px 38px rgba(16,22,30,.24),0 0 0 1px rgba(65,75,85,.12);
+}
+.achievement-logo{border:3px solid rgba(255,255,255,.8)}
+.about-card{gap:38px;padding:42px}
+.about-content h2{font-size:clamp(1.8rem,3vw,2.35rem);font-weight:600;letter-spacing:-.035em}
+.about-content p{font-size:1.06rem;line-height:1.85}
+@media(max-width:768px){
+ .about-card{padding:28px 22px;gap:22px}
+ .about-content p{font-size:.98rem;line-height:1.7}
+}
