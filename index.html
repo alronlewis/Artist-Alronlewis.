@@ -1533,6 +1533,16 @@ footer a{color:#ddd}
 
 <script>
 (function(){
+  // Always reveal the homepage from the top after the intro, never a restored gallery scroll position.
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch(e) {}
+  function resetHomeScroll(){
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+  resetHomeScroll();
+  window.addEventListener("pageshow",resetHomeScroll);
+  window.addEventListener("load",resetHomeScroll,{once:true});
   const intro = document.getElementById("alron-intro");
   if (!intro) return;
   let alreadySeen = false;
@@ -1657,7 +1667,7 @@ footer a{color:#ddd}
     // Let a first-interaction audio start finish before fading it out.
     intro.classList.add("intro-leave");
     window.setTimeout(stopMusic,850);
-    setTimeout(function(){ intro.remove(); },1250);
+    setTimeout(function(){ intro.remove(); resetHomeScroll(); },1250);
   }
   if (alreadySeen) { intro.remove(); return; }
   try { sessionStorage.setItem("alronIntroSeen","yes"); } catch(e) {}
