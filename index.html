@@ -1629,8 +1629,9 @@ footer a{color:#ddd}
   }
   function closeIntro(){
     if (!intro || intro.classList.contains("intro-leave")) return;
-    stopMusic();
+    // Let a first-interaction audio start finish before fading it out.
     intro.classList.add("intro-leave");
+    window.setTimeout(stopMusic,850);
     setTimeout(function(){ intro.remove(); },1250);
   }
   if (alreadySeen) { intro.remove(); return; }
@@ -1640,10 +1641,14 @@ footer a{color:#ddd}
   let firstGestureHandled = false;
   function resumeAfterGesture(){
     if (firstGestureHandled || musicPlaying || !document.getElementById("alron-intro")) return;
-    firstGestureHandled = true;
-    startMusic();
-    document.removeEventListener("pointerdown",resumeAfterGesture,true);
-    document.removeEventListener("keydown",resumeAfterGesture,true);
+    // Browser-approved user gesture: resume audio immediately in this event.
+    startMusic().then(function(){
+      if (musicPlaying) {
+        firstGestureHandled = true;
+        document.removeEventListener("pointerdown",resumeAfterGesture,true);
+        document.removeEventListener("keydown",resumeAfterGesture,true);
+      }
+    });
   }
   document.addEventListener("pointerdown",resumeAfterGesture,true);
   document.addEventListener("keydown",resumeAfterGesture,true);
