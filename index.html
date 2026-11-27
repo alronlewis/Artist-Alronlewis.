@@ -405,7 +405,7 @@
 #alron-intro .intro-grain{position:absolute;inset:0;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E")}
 #alron-intro .intro-center{position:relative;z-index:2;width:min(90%,760px);text-align:center;transform:translateY(0) scale(1);transition:opacity .7s ease,transform .7s ease}
 #alron-intro .intro-mark{width:min(68vw,390px);display:block;margin:0 auto 18px;overflow:visible}
-#alron-intro .intro-path{fill:none;stroke:#292824;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));animation:alronDraw 3.1s cubic-bezier(.55,.05,.3,1) .35s forwards}
+#alron-intro .intro-path{fill:none;stroke:url(#infinitySteel);stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;filter:drop-shadow(0 2px 2px rgba(20,25,30,.28)) drop-shadow(0 0 7px rgba(190,205,215,.55));animation:alronDraw 3.1s cubic-bezier(.55,.05,.3,1) .35s forwards}#alron-intro .intro-glint{fill:none;stroke:rgba(255,255,255,.62);stroke-width:1.05;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;opacity:.72;animation:alronDraw 3.1s cubic-bezier(.55,.05,.3,1) .35s forwards}#alron-intro.intro-finale .intro-path{stroke:url(#infinitySteel)}
 #alron-intro .intro-name{font:400 clamp(2.5rem,8vw,5.6rem)/1.05 Georgia,serif;letter-spacing:.015em;margin:0;opacity:0;transform:translateY(12px);animation:alronReveal .9s ease 3.25s forwards}
 #alron-intro .intro-tag{font:500 11px Arial,sans-serif;letter-spacing:.36em;margin-top:17px;opacity:0;animation:alronReveal .9s ease 4s forwards}
 #alron-intro .intro-skip{position:absolute;z-index:3;right:22px;top:20px;border:1px solid rgba(30,30,30,.35);background:transparent;color:inherit;padding:9px 13px;border-radius:30px;font:10px Arial,sans-serif;letter-spacing:.16em;cursor:pointer}
@@ -413,7 +413,7 @@
 #alron-intro .intro-enter span{display:inline-block;margin-left:8px;animation:alronNudge 1.2s ease-in-out 5s infinite}
 #alron-intro.intro-finale{background:#101010;color:#f4f1e9}
 #alron-intro.intro-finale .intro-paper{opacity:0;transition:opacity 1s ease}
-#alron-intro.intro-finale .intro-path{stroke:#eeeae1}
+
 #alron-intro.intro-finale .intro-tag{color:#c8c4bc}
 #alron-intro.intro-leave{animation:alronExit 1.15s cubic-bezier(.22,.61,.36,1) forwards;pointer-events:none}#alron-intro.intro-leave .intro-center{opacity:0;transform:translateY(-14px) scale(.98);transition:opacity .75s ease,transform .85s cubic-bezier(.22,.61,.36,1)}@keyframes alronExit{0%{opacity:1;filter:blur(0)}70%{opacity:.35;filter:blur(2px)}100%{opacity:0;filter:blur(7px);visibility:hidden}}
 @keyframes alronDraw{to{stroke-dashoffset:0}}
@@ -451,8 +451,15 @@
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
   <div class="intro-center">
-    <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Hand-drawn infinity symbol">
+    <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Liquid steel infinity symbol">
+      <defs>
+        <linearGradient id="infinitySteel" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#30383e"/><stop offset="16%" stop-color="#dce4e8"/><stop offset="29%" stop-color="#697780"/><stop offset="43%" stop-color="#ffffff"/><stop offset="56%" stop-color="#78858d"/><stop offset="72%" stop-color="#f4f7f8"/><stop offset="88%" stop-color="#89959c"/><stop offset="100%" stop-color="#30383e"/>
+          <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;-1 0" dur="4.8s" repeatCount="indefinite"/>
+        </linearGradient>
+      </defs>
       <path class="intro-path" d="M160 85 C121 24 53 26 53 85 C53 144 121 146 160 85 C199 24 267 26 267 85 C267 144 199 146 160 85"/>
+      <path class="intro-glint" d="M160 85 C121 24 53 26 53 85 C53 144 121 146 160 85 C199 24 267 26 267 85 C267 144 199 146 160 85"/>
     </svg>
     <h1 class="intro-name">Artist Alron Lewis</h1>
     <div class="intro-tag">ZERO TO INFINITE <span style="font-size:1.25em">∞</span></div>
