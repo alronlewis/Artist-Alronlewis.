@@ -1321,7 +1321,7 @@ footer a{color:#ddd}
 <div id="alron-intro" aria-label="Alron Lewis — Zero to Infinite introduction">
   <div class="intro-paper"></div><div class="intro-grain"></div>
   <button class="intro-skip" type="button" aria-label="Skip introduction">SKIP INTRO ×</button>
-  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>SOUND ON</span></button>
+  <button class="intro-sound" type="button" aria-label="Turn intro music on or off">♫ <span>TAP FOR SOUND</span></button>
   <div class="intro-center">
     <svg class="intro-mark" viewBox="0 0 320 170" role="img" aria-label="Liquid steel infinity symbol">
       <defs>
@@ -1623,6 +1623,7 @@ footer a{color:#ddd}
         masterGain.connect(audioCtx.destination);
       }
       await audioCtx.resume();
+      if (audioCtx.state !== "running") { setSoundLabel("TAP FOR SOUND"); return; }
       const now = audioCtx.currentTime;
       masterGain.gain.cancelScheduledValues(now);
       masterGain.gain.setTargetAtTime(.72,now,.9);
