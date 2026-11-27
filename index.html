@@ -474,6 +474,82 @@ footer a{color:#ddd}
  .hero-scroll{display:none}
 }
 
+
+/* HOMEPAGE NAV + DYNAMIC STEEL GLASS CARDS */
+.custom-nav{background:rgba(8,9,11,.96)!important;border-bottom:1px solid rgba(215,225,235,.2)!important}
+.custom-nav .navbar-brand{color:#fff!important}
+.custom-nav .navbar-toggler{border:1px solid rgba(255,255,255,.45)!important;padding:7px 10px}
+.custom-nav .navbar-toggler-icon{filter:brightness(0) invert(1);opacity:1}
+.custom-nav .nav-link{color:#f1f3f5!important;font-weight:600!important;text-shadow:0 1px 8px #000;opacity:1!important}
+.custom-nav .nav-link:hover,.custom-nav .nav-link:focus{color:#fff!important}
+@media(min-width:992px){
+  .custom-nav .navbar-toggler{display:none!important}
+  .custom-nav #navbarNav{display:flex!important;flex-basis:auto!important;visibility:visible!important}
+  .custom-nav .navbar-nav{flex-direction:row!important;gap:8px}
+}
+@media(max-width:991.98px){
+  .custom-nav #navbarNav{background:rgba(9,10,12,.98);padding:12px 18px;margin-top:10px;border:1px solid rgba(255,255,255,.13);border-radius:14px}
+  .custom-nav .nav-link{padding:12px 4px!important}
+}
+.about-card,.achievement-card,.gallery-card,.sale-feature-card{
+  color:#f2f3f4!important;
+  background:linear-gradient(135deg,rgba(39,43,49,.97),rgba(17,19,23,.97) 58%,rgba(48,53,60,.94))!important;
+  border:1px solid rgba(220,230,240,.2)!important;
+  box-shadow:0 22px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  position:relative;isolation:isolate;overflow:hidden;
+}
+.about-card:before,.achievement-card:before,.gallery-card:before,.sale-feature-card:before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,#9daab5,#fff,#7c8994,transparent);
+  opacity:.9;pointer-events:none
+}
+.about-content h2,.achievement-content h3,.gallery-card h2{color:#f6f5f1!important}
+.about-content p,.achievement-content p{color:#cbd0d5!important}
+.about-content strong,.achievement-content strong{color:#fff!important}
+.achievement-year{color:#aeb9c3!important}
+.about-card,.achievement-card{transition:transform .45s cubic-bezier(.2,.75,.25,1),box-shadow .45s ease,border-color .45s ease!important}
+.about-card:hover,.achievement-card:hover{transform:translateY(-7px) scale(1.008);border-color:rgba(220,235,248,.48)!important;box-shadow:0 30px 75px rgba(0,0,0,.55),0 0 28px rgba(180,200,220,.08),inset 0 1px 0 rgba(255,255,255,.18)!important}
+.achievement-card{position:relative}
+.achievement-card:after{content:"";position:absolute;width:210px;height:210px;right:-95px;top:-115px;border-radius:50%;background:radial-gradient(circle,rgba(205,220,235,.13),transparent 68%);pointer-events:none}
+.achievement-logo{position:relative;z-index:1;transition:transform .5s cubic-bezier(.2,.75,.25,1),filter .5s ease!important}
+.achievement-card:hover .achievement-logo{transform:scale(1.035) rotate(-1deg);filter:contrast(1.04)}
+.gallery-card{transition:border-color .35s ease,box-shadow .35s ease}
+.gallery-card img{transition:transform .45s cubic-bezier(.2,.75,.25,1),filter .45s ease!important}
+.gallery-card img:hover{transform:translateY(-8px) scale(1.025);filter:brightness(1.06)}
+/* Artwork-for-sale feature */
+.sale-feature-section{background:#0b0b0c!important}
+.sale-feature-card{max-width:1100px;margin:auto;border-radius:28px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:420px;transition:transform .4s ease,box-shadow .4s ease}
+.sale-feature-card:hover{transform:translateY(-6px);box-shadow:0 32px 80px rgba(0,0,0,.58),0 0 35px rgba(190,205,220,.08),inset 0 1px 0 rgba(255,255,255,.16)!important}
+.sale-feature-visual{position:relative;min-height:420px;padding:24px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(160,175,190,.13),transparent 68%)}
+.sale-feature-carousel{width:100%;height:100%;min-height:370px;border-radius:18px;overflow:hidden;background:#090a0c}
+.sale-feature-carousel .carousel-inner,.sale-feature-carousel .carousel-item{height:100%;min-height:370px}
+.sale-feature-carousel .carousel-item img{width:100%;height:370px;object-fit:contain;padding:10px;display:block;filter:drop-shadow(0 18px 25px rgba(0,0,0,.45))}
+.sale-feature-carousel .carousel-indicators{margin-bottom:8px}
+.sale-feature-carousel .carousel-indicators button{width:7px;height:7px;border:0;border-radius:50%;margin:0 5px}
+.sale-feature-carousel .carousel-control-prev,.sale-feature-carousel .carousel-control-next{width:12%;opacity:.8}
+.sale-image-caption{position:absolute;left:34px;top:34px;z-index:3;padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:30px;background:rgba(8,9,11,.65);color:#e9edf0;font:9px Arial,sans-serif;letter-spacing:.16em;backdrop-filter:blur(10px)}
+.sale-feature-copy{padding:clamp(28px,5vw,64px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.sale-eyebrow{font:10px Arial,sans-serif;letter-spacing:.2em;color:#b8c3cc;margin-bottom:24px}
+.sale-eyebrow i{font-size:7px;color:#d5e0e8;margin-right:8px;vertical-align:2px}
+.sale-feature-copy h2{font:400 clamp(2.2rem,4vw,3.7rem)/1.04 Georgia,serif;letter-spacing:-.035em;color:#f6f4ef;margin:0 0 22px}
+.sale-feature-copy h2 em{color:#aebbc5;font-weight:400}
+.sale-feature-copy p{max-width:390px;color:#c0c6cc;font-size:14px;line-height:1.9;margin:0 0 30px}
+.sale-feature-link{display:inline-flex;align-items:center;gap:35px;padding:15px 19px;background:#e9edf0;color:#111519;text-decoration:none;font:10px Arial,sans-serif;letter-spacing:.13em;transition:all .3s ease}
+.sale-feature-link:hover{background:#b8c5ce;color:#080a0c;transform:translateY(-3px);gap:43px}
+.sale-footnote{margin-top:28px;color:#84919b;font:9px Arial,sans-serif;letter-spacing:.18em}
+@media(max-width:767px){
+ .sale-feature-card{grid-template-columns:1fr;border-radius:22px}
+ .sale-feature-visual{min-height:300px;padding:15px}
+ .sale-feature-carousel,.sale-feature-carousel .carousel-inner,.sale-feature-carousel .carousel-item{min-height:270px}
+ .sale-feature-carousel .carousel-item img{height:270px}
+ .sale-image-caption{left:24px;top:24px;font-size:8px}
+ .sale-feature-copy{padding:30px 25px 34px}
+ .sale-feature-copy h2{font-size:2.5rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .about-card,.achievement-card,.gallery-card img,.sale-feature-card,.sale-feature-link{transition:none!important}
+}
+
 </style>
 
 
@@ -610,40 +686,35 @@ footer a{color:#ddd}
 
   </div>
 </section>
-<!-- SALE PREVIEW CARD -->
-<section class="py-5">
+<!-- ARTWORK FOR SALE -->
+<section class="sale-feature-section py-5" id="artwork-for-sale">
   <div class="container">
-
-    <div class="sale-preview-card"
-         onclick="window.location.href='commission.html#sale'">
-
-      <div id="saleCarousel"
-           class="carousel slide sale-preview"
-           data-bs-ride="carousel">
-
-        <div class="carousel-inner">
-
-          <div class="carousel-item active">
-            <img src="Owl.jpg" alt="Charcoal owl artwork by Alron Lewis">
+    <article class="sale-feature-card">
+      <div class="sale-feature-visual">
+        <div id="saleCarousel" class="carousel slide sale-feature-carousel" data-bs-ride="carousel" data-bs-interval="3800">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#saleCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Artwork view 1"></button>
+            <button type="button" data-bs-target="#saleCarousel" data-bs-slide-to="1" aria-label="Artwork view 2"></button>
+            <button type="button" data-bs-target="#saleCarousel" data-bs-slide-to="2" aria-label="Artwork view 3"></button>
           </div>
-
-          <div class="carousel-item">
-            <img src="Owl 2.jpg" alt="Charcoal owl artwork detail by Alron Lewis">
+          <div class="carousel-inner">
+            <div class="carousel-item active"><img src="Owl.jpg" alt="Charcoal owl artwork by Alron Lewis"></div>
+            <div class="carousel-item"><img src="Owl 2.jpg" alt="Detail of the charcoal owl artwork by Alron Lewis"></div>
+            <div class="carousel-item"><img src="owl 3.jpg" alt="Another view of the original owl artwork by Alron Lewis"></div>
           </div>
-
-          <div class="carousel-item">
-            <img src="owl 3.jpg" alt="Owl artwork by Alron Lewis">
-          </div>
-
+          <button class="carousel-control-prev" type="button" data-bs-target="#saleCarousel" data-bs-slide="prev" aria-label="Previous artwork image"><span class="carousel-control-prev-icon"></span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#saleCarousel" data-bs-slide="next" aria-label="Next artwork image"><span class="carousel-control-next-icon"></span></button>
         </div>
+        <span class="sale-image-caption">ORIGINAL ARTWORK · CHARCOAL</span>
       </div>
-
-      <div class="sale-preview-label">
-        VIEW ARTWORK FOR SALE
+      <div class="sale-feature-copy">
+        <span class="sale-eyebrow"><i class="fa-solid fa-circle"></i> AVAILABLE ARTWORK</span>
+        <h2>An artwork<br><em>looking for a home.</em></h2>
+        <p>Explore original artwork available for purchase. Each piece is created by hand, with its own story, character and details.</p>
+        <a class="sale-feature-link" href="commission.html#sale">VIEW ARTWORK FOR SALE <span aria-hidden="true">↗</span></a>
+        <span class="sale-footnote">ONE OF A KIND · MADE BY HAND</span>
       </div>
-
-    </div>
-
+    </article>
   </div>
 </section>
 <!-- Art Gallery -->
