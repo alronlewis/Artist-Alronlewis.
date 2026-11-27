@@ -1073,6 +1073,36 @@ footer a{color:#ddd}
 }
 </style>
 
+<style id="about-image-polished-corners">
+
+/* POLISHED PORTRAIT EDGES */
+.about-visual{
+  padding:18px!important;
+  border-radius:22px!important;
+  background:linear-gradient(145deg,#0b0c0e,#050607)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 28px rgba(0,0,0,.24)!important;
+}
+.about-visual img{
+  border-radius:16px!important;
+  overflow:hidden!important;
+  clip-path:inset(0 round 16px);
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.035)!important;
+}
+.about-visual:after{
+  border-radius:16px!important;
+  inset:18px!important;
+}
+.about-card:hover .about-visual img{
+  border-color:rgba(225,235,242,.34)!important;
+}
+@media(max-width:767px){
+  .about-visual{padding:12px!important;border-radius:18px!important}
+  .about-visual img{border-radius:13px!important;clip-path:inset(0 round 13px)}
+  .about-visual:after{inset:12px!important;border-radius:13px!important}
+}
+
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
