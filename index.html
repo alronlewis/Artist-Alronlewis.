@@ -1589,6 +1589,31 @@ footer a{color:#ddd}
     shimmer.stop(now+7);
     activeVoices.push({osc:shimmer,gain:shimmerGain});
   }
+  function playSfx(kind){
+    if (!audioCtx || audioCtx.state !== "running") return;
+    const now = audioCtx.currentTime;
+    const makeTone = function(freqStart,freqEnd,delay,duration,volume,type){
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type || "sine";
+      osc.frequency.setValueAtTime(freqStart,now+delay);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(1,freqEnd),now+delay+duration);
+      gain.gain.setValueAtTime(0,now+delay);
+      gain.gain.linearRampToValueAtTime(volume,now+delay+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,now+delay+duration);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now+delay); osc.stop(now+delay+duration+.03);
+    };
+    if (kind === "intro"){
+      // Soft airy metallic shimmer as the infinity mark begins.
+      makeTone(880,1320,0,.75,.045,"sine");
+      makeTone(440,660,.08,.9,.025,"triangle");
+    } else {
+      // A clean, rising glass-like chime on ENTER.
+      makeTone(520,1040,0,.42,.07,"sine");
+      makeTone(780,1560,.07,.55,.035,"triangle");
+    }
+  }
   function startMusic(){
     try{
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -1606,6 +1631,7 @@ footer a{color:#ddd}
         masterGain.gain.cancelScheduledValues(now);
         masterGain.gain.setTargetAtTime(.72,now,.35);
         musicPlaying = true;
+        if (!introSfxPlayed) { playSfx("intro"); introSfxPlayed = true; }
         playChord();
         if (chordTimer) clearInterval(chordTimer);
         chordTimer = window.setInterval(playChord,5600);
@@ -1638,6 +1664,7 @@ footer a{color:#ddd}
   // Retry automatically on the visitor's first normal interaction if the
   // browser blocks audible autoplay. No separate "tap for sound" prompt.
   let firstGestureHandled = false;
+  let introSfxPlayed = false;
   function resumeAfterGesture(){
     if (firstGestureHandled || musicPlaying || !document.getElementById("alron-intro")) return;
     firstGestureHandled = true;
@@ -1647,8 +1674,8 @@ footer a{color:#ddd}
   }
   document.addEventListener("pointerdown",resumeAfterGesture,true);
   document.addEventListener("keydown",resumeAfterGesture,true);
-  intro.querySelector(".intro-skip").addEventListener("click",closeIntro);
-  intro.querySelector(".intro-enter").addEventListener("click",closeIntro);
+  intro.querySelector(".intro-skip").addEventListener("click",function(){ playSfx("enter"); closeIntro(); });
+  intro.querySelector(".intro-enter").addEventListener("click",function(){ playSfx("enter"); closeIntro(); });
   // Browsers block sound autoplay. Start on the first tap/key and keep the intro open until Enter or Skip.
   window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
 })();
