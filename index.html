@@ -423,6 +423,57 @@
 @media(max-width:600px){#alron-intro .intro-skip{right:14px;top:14px}#alron-intro .intro-tag{letter-spacing:.23em;font-size:9px}}
 @media(prefers-reduced-motion:reduce){#alron-intro *,#alron-intro *:before{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
 
+
+/* DARK CINEMATIC HOMEPAGE */
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:#0b0b0c;color:#eee;font-family:"Poppins",Arial,sans-serif}
+.home-hero{position:relative;min-height:calc(100vh - 0px);display:flex;align-items:center;justify-content:flex-start;text-align:left;padding:120px clamp(26px,9vw,140px) 105px;background:#101012 url('homecover.jpg') center/cover no-repeat;overflow:hidden}
+.home-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,6,.88) 0%,rgba(5,5,6,.55) 48%,rgba(5,5,6,.08) 100%),linear-gradient(0deg,rgba(5,5,6,.62),transparent 35%);pointer-events:none}
+.hero-shade{position:absolute;inset:0;background:radial-gradient(ellipse at 72% 42%,rgba(255,255,255,.08),transparent 38%);z-index:1}
+.hero-copy{position:relative;z-index:2;max-width:760px}
+.hero-kicker{font-size:10px!important;letter-spacing:.42em;color:#c4c4c4!important;margin:0 0 24px!important;text-shadow:none!important}
+.home-hero h1{font:400 clamp(3.2rem,8.8vw,7.8rem)/.92 Georgia,serif;letter-spacing:-.045em;color:#f5f3ee;text-shadow:0 5px 30px rgba(0,0,0,.35);margin:0}
+.home-hero h1 span{color:#b9c0c5}
+.home-hero .hero-tagline{font:500 11px Arial,sans-serif;letter-spacing:.42em;color:#d2d0cb;margin:30px 0 0;text-shadow:none}
+.hero-tagline span{font-size:1.5em;margin-left:5px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:42px}
+.hero-btn{display:inline-flex;align-items:center;gap:22px;padding:15px 20px;text-decoration:none;font:10px Arial,sans-serif;letter-spacing:.15em;transition:all .3s ease}
+.hero-btn-primary{background:#eee;color:#111;border:1px solid #eee}
+.hero-btn-primary:hover{background:#b9c0c5;border-color:#b9c0c5;color:#090909;transform:translateY(-3px)}
+.hero-btn-quiet{border:1px solid rgba(255,255,255,.45);color:#f4f2ed;background:rgba(15,15,16,.18);backdrop-filter:blur(8px)}
+.hero-btn-quiet:hover{border-color:#fff;background:rgba(255,255,255,.1);color:#fff;transform:translateY(-3px)}
+.hero-bottomline{position:absolute;z-index:2;left:clamp(26px,9vw,140px);right:clamp(26px,9vw,140px);bottom:28px;display:flex;justify-content:space-between;color:rgba(255,255,255,.65);font:9px Arial,sans-serif;letter-spacing:.2em}
+.hero-scroll{position:absolute;z-index:2;right:clamp(26px,9vw,140px);bottom:75px;color:#ddd;font:9px Arial,sans-serif;letter-spacing:.18em;writing-mode:vertical-rl;display:flex;gap:12px;align-items:center}
+.custom-nav{background:rgba(12,12,13,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.custom-nav .navbar-brand{color:#f3f1ec}
+.custom-nav .nav-link{color:#c9c9c9!important;font-size:12px;letter-spacing:.04em}
+.custom-nav .nav-link::after{background:#c4cbd0}
+.about-section,.gallery-section,.social-links{background:#101012!important;color:#eee}
+.about-card,.achievement-card,.gallery-card{background:#171719;color:#eee;border:1px solid rgba(255,255,255,.07);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.about-content p,.achievement-content p{color:#bcbcbc}
+.achievement-section{background:#0b0b0c;color:#eee}
+.achievement-year{color:#a7a7a7}
+.sale-preview-card{background:#171719;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 50px rgba(0,0,0,.24)}
+.sale-preview-card img{background:#101012}
+.sale-preview-label{color:#d1d1d1;letter-spacing:.16em;font-size:11px}
+.gallery-card h2{color:#e8e6e1;font:400 clamp(1.25rem,2.8vw,2rem)/1.35 Georgia,serif}
+.social-links p{color:#aaa}
+.social-links .btn{border-color:#777;color:#eee}
+.social-links .btn:hover{background:#eee;color:#111;border-color:#eee}
+footer{background:#070708;color:#aaa;border-top:1px solid rgba(255,255,255,.08)}
+footer a{color:#ddd}
+@media(max-width:768px){
+ .home-hero{min-height:88vh;padding:115px 25px 115px;background-position:60% center}
+ .home-hero:after{background:linear-gradient(90deg,rgba(5,5,6,.82),rgba(5,5,6,.34)),linear-gradient(0deg,rgba(5,5,6,.65),transparent 45%)}
+ .home-hero h1{font-size:clamp(3.1rem,14vw,5.3rem)}
+ .hero-kicker{letter-spacing:.3em}
+ .home-hero .hero-tagline{letter-spacing:.28em}
+ .hero-actions{gap:10px;margin-top:32px;flex-direction:column;align-items:flex-start}
+ .hero-btn{min-width:230px;justify-content:space-between}
+ .hero-bottomline{left:24px;right:24px;bottom:22px;font-size:8px;letter-spacing:.12em}
+ .hero-scroll{display:none}
+}
+
 </style>
 
 
@@ -468,10 +519,20 @@
 </div>
 
 
-<!-- Cover Page -->
-<header>
-    <h1>Art by Alron Lewis</h1>
-    <p>Zero To Infinite</p>
+<!-- CINEMATIC HOMEPAGE HERO -->
+<header class="home-hero">
+  <div class="hero-shade"></div>
+  <div class="hero-copy">
+    <p class="hero-kicker">THE WORLD OF ART</p>
+    <h1>ARTIST<br><span>ALRON LEWIS</span></h1>
+    <p class="hero-tagline">ZERO TO INFINITE <span>∞</span></p>
+    <div class="hero-actions">
+      <a class="hero-btn hero-btn-primary" href="#gallery">EXPLORE MY ARTWORK <span>↗</span></a>
+      <a class="hero-btn hero-btn-quiet" href="commission.html">COMMISSION AN ARTWORK <span>↗</span></a>
+    </div>
+  </div>
+  <div class="hero-bottomline"><span>SELF-TAUGHT ARTIST</span><span>EST. 2020</span><span>INDIA</span></div>
+  <div class="hero-scroll">SCROLL TO EXPLORE <span>↓</span></div>
 </header>
 
 <!-- Navigation -->
@@ -586,7 +647,7 @@
   </div>
 </section>
 <!-- Art Gallery -->
-<section class="gallery-section py-5">
+<section class="gallery-section py-5" id="gallery">
   <div class="container">
     <div class="gallery-card">
       <h2 class="text-center">
