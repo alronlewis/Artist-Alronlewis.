@@ -1103,6 +1103,55 @@ footer a{color:#ddd}
 }
 
 </style>
+<style id="about-image-only-corners">
+
+/* IMAGE ONLY — NO EXTRA INNER BACKGROUND OR FRAME */
+.about-visual{
+  margin:24px!important;
+  padding:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.about-visual img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:370px!important;
+  min-height:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:18px!important;
+  clip-path:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.about-visual:after{
+  inset:0!important;
+  border-radius:18px!important;
+  pointer-events:none!important;
+}
+@media(max-width:767px){
+  .about-visual{
+    margin:14px 14px 0!important;
+    padding:0!important;
+    height:270px!important;
+    min-height:270px!important;
+    border-radius:0!important;
+  }
+  .about-visual img{
+    height:270px!important;
+    max-height:270px!important;
+    border-radius:15px!important;
+  }
+  .about-visual:after{inset:0!important;border-radius:15px!important}
+}
+
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
