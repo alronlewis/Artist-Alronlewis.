@@ -1289,43 +1289,12 @@ footer a{color:#ddd}
 </style>
 
 <style id="scroll-brush-reveal">
-/* Scroll reveal: gentle first-visit entrance with a painterly brush sweep */
-.scroll-reveal-pending{
-  opacity:0!important;
-  transform:translate3d(0,28px,0);
-  transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1);
-}
-.scroll-reveal-pending.scroll-revealed{
-  opacity:1!important;
-  transform:translate3d(0,0,0);
-}
-.scroll-brush-stroke{
-  position:absolute;
-  z-index:8;
-  top:0;
-  left:0;
-  width:58%;
-  height:5px;
-  pointer-events:none;
-  opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(222,231,239,.22) 12%,rgba(244,248,251,.95) 48%,rgba(167,184,199,.72) 82%,transparent);
-  clip-path:polygon(0 42%,12% 15%,29% 36%,48% 0,68% 24%,84% 8%,100% 40%,97% 68%,78% 55%,58% 100%,38% 62%,17% 83%,0 42%);
-  filter:drop-shadow(0 0 8px rgba(210,225,238,.3));
-  transform:translateX(-125%) rotate(-1deg);
-}
-.scroll-revealed .scroll-brush-stroke{
-  animation:scrollBrushSweep 1.15s cubic-bezier(.2,.65,.25,1) .12s both;
-}
-@keyframes scrollBrushSweep{
-  0%{opacity:0;transform:translateX(-125%) rotate(-1deg)}
-  18%{opacity:.9}
-  78%{opacity:.65}
-  100%{opacity:0;transform:translateX(225%) rotate(-1deg)}
-}
-@media(prefers-reduced-motion:reduce){
-  .scroll-reveal-pending,.scroll-reveal-pending.scroll-revealed{opacity:1!important;transform:none!important;transition:none!important}
-  .scroll-brush-stroke{display:none!important}
-}
+/* One shared brush sweep reveals each major section as it enters view */
+.scroll-reveal-target{opacity:0;clip-path:inset(0 0 100% 0);transition:opacity .9s ease,clip-path 1.15s cubic-bezier(.2,.7,.2,1)}
+.scroll-reveal-target.is-brush-revealed{opacity:1;clip-path:inset(0 0 0 0)}
+#scroll-brush{position:fixed;left:-12%;top:0;width:124%;height:18px;z-index:9998;pointer-events:none;opacity:0;transform:translateY(-100px) rotate(-1deg);background:linear-gradient(90deg,transparent,rgba(155,177,194,.28) 12%,rgba(235,242,247,.9) 48%,rgba(166,185,201,.65) 82%,transparent);clip-path:polygon(0 48%,9% 15%,24% 42%,42% 0,61% 31%,78% 8%,100% 43%,96% 68%,76% 55%,58% 100%,37% 62%,17% 83%,0 48%);filter:drop-shadow(0 0 12px rgba(205,224,239,.3));will-change:transform,opacity}
+#scroll-brush.is-active{opacity:1}
+@media(prefers-reduced-motion:reduce){.scroll-reveal-target{opacity:1;clip-path:none;transition:none}#scroll-brush{display:none}}
 </style>
 
 </head>
@@ -1732,29 +1701,33 @@ footer a{color:#ddd}
 
 <script id="scroll-brush-reveal-script">
 (function(){
-  const targets = document.querySelectorAll(
-    ".about-section, #achievements, #artwork-for-sale, #gallery, .social-links, footer, .about-card, .achievement-card, .sale-feature-card, .gallery-card"
-  );
-  if (!targets.length) return;
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!("IntersectionObserver" in window)) return;
-  const observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      el.classList.add("scroll-revealed");
-      observer.unobserve(el);
+  const sections=document.querySelectorAll('.about-section,#achievements,#artwork-for-sale,#gallery,.social-links,footer');
+  if(!sections.length||!('IntersectionObserver' in window))return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const brush=document.createElement('div');brush.id='scroll-brush';brush.setAttribute('aria-hidden','true');document.body.appendChild(brush);
+  let busy=false;
+  function sweep(section){
+    const rect=section.getBoundingClientRect();
+    const y=Math.max(0,Math.min(window.innerHeight-18,rect.top+Math.min(rect.height*.22,window.innerHeight*.28)));
+    brush.classList.add('is-active');
+    brush.style.transition='none';
+    brush.style.transform='translateY('+y+'px) rotate(-1deg)';
+    requestAnimationFrame(function(){
+      brush.style.transition='transform 1.05s cubic-bezier(.2,.65,.25,1),opacity .2s ease';
+      brush.style.transform='translateY('+(y+Math.min(rect.height*.72,window.innerHeight*.68))+'px) rotate(-1deg)';
     });
-  },{threshold:.12,rootMargin:"0px 0px -7% 0px"});
-  targets.forEach(function(el){
-    el.classList.add("scroll-reveal-pending");
-    if (getComputedStyle(el).position === "static") el.style.position = "relative";
-    const stroke = document.createElement("span");
-    stroke.className = "scroll-brush-stroke";
-    stroke.setAttribute("aria-hidden","true");
-    el.appendChild(stroke);
-    observer.observe(el);
-  });
+    window.setTimeout(function(){brush.classList.remove('is-active');},1100);
+  }
+  const observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting)return;
+      const section=entry.target;
+      section.classList.add('is-brush-revealed');
+      sweep(section);
+      observer.unobserve(section);
+    });
+  },{threshold:.08,rootMargin:'0px 0px -8% 0px'});
+  sections.forEach(function(section){section.classList.add('scroll-reveal-target');observer.observe(section);});
 })();
 </script>
 
