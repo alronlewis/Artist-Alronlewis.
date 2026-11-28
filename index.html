@@ -1288,34 +1288,7 @@ footer a{color:#ddd}
 
 </style>
 
-<style id="nav-performance-fix">
-/* Keep the navbar lightweight and let Bootstrap's collapse height animate cleanly. */
-html{scroll-behavior:auto!important}
-.custom-nav{
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  box-shadow:0 4px 14px rgba(0,0,0,.2)!important;
-}
-.custom-nav .nav-link{
-  transition:color .3s ease,opacity .3s ease!important;
-}
-.custom-nav .nav-link::after{
-  transition:width .35s ease-in-out!important;
-}
-@media(max-width:991.98px){
-  .custom-nav .navbar-collapse.collapsing{
-    transition:height .6s cubic-bezier(.4,0,.2,1)!important;
-    overflow:hidden;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  .custom-nav .nav-link,
-  .custom-nav .nav-link::after,
-  .custom-nav .navbar-collapse.collapsing{
-    transition-duration:.01ms!important;
-  }
-}
-</style>
+
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
