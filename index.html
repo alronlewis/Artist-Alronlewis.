@@ -1287,6 +1287,27 @@ footer a{color:#ddd}
 }
 
 </style>
+
+<style id="nav-performance-fix">
+/* Keep the existing navigation design while reducing scroll and tap lag. */
+html{scroll-behavior:auto!important}
+.custom-nav{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.2)!important;
+  transform:translateZ(0);
+}
+.custom-nav .nav-link,
+.custom-nav .nav-link::after{
+  transition:none!important;
+}
+@media(max-width:991.98px){
+  .custom-nav .navbar-collapse.collapsing,
+  .custom-nav .navbar-collapse.collapse{
+    transition:none!important;
+  }
+}
+</style>
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
