@@ -1289,7 +1289,7 @@ footer a{color:#ddd}
 </style>
 
 <style id="nav-performance-fix">
-/* Keep the existing navigation design while reducing scroll and tap lag. */
+/* Lightweight navigation with a slower, smoother menu reveal. */
 html{scroll-behavior:auto!important}
 .custom-nav{
   -webkit-backdrop-filter:none!important;
@@ -1297,14 +1297,25 @@ html{scroll-behavior:auto!important}
   box-shadow:0 4px 14px rgba(0,0,0,.2)!important;
   transform:translateZ(0);
 }
-.custom-nav .nav-link,
+.custom-nav .nav-link{
+  transition:color .28s ease,opacity .28s ease!important;
+}
 .custom-nav .nav-link::after{
-  transition:none!important;
+  transition:width .32s cubic-bezier(.22,.61,.36,1)!important;
 }
 @media(max-width:991.98px){
-  .custom-nav .navbar-collapse.collapsing,
-  .custom-nav .navbar-collapse.collapse{
-    transition:none!important;
+  .custom-nav .navbar-collapse.collapsing{
+    transition:height .42s cubic-bezier(.22,.61,.36,1)!important;
+  }
+  .custom-nav .navbar-collapse{
+    transition:opacity .3s ease!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .custom-nav .nav-link,
+  .custom-nav .nav-link::after,
+  .custom-nav .navbar-collapse.collapsing{
+    transition-duration:.01ms!important;
   }
 }
 </style>
