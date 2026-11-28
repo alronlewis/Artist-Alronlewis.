@@ -409,8 +409,6 @@
 #alron-intro .intro-name{font:400 clamp(2.5rem,8vw,5.6rem)/1.05 Georgia,serif;letter-spacing:.015em;margin:0;opacity:0;transform:translateY(12px);animation:alronReveal .9s ease 3.25s forwards}
 #alron-intro .intro-tag{font:500 11px Arial,sans-serif;letter-spacing:.36em;margin-top:17px;opacity:0;animation:alronReveal .9s ease 4s forwards}
 #alron-intro .intro-skip{position:absolute;z-index:3;right:22px;top:20px;border:1px solid rgba(30,30,30,.35);background:transparent;color:inherit;padding:9px 13px;border-radius:30px;font:10px Arial,sans-serif;letter-spacing:.16em;cursor:pointer}
-#alron-intro .intro-enter{font:10px Arial,sans-serif;letter-spacing:.22em;margin-top:48px;padding:12px 16px;border:1px solid transparent;border-radius:30px;background:transparent;color:inherit;cursor:pointer;opacity:0;animation:alronReveal .8s ease 4.8s forwards;transition:border-color .25s ease,letter-spacing .25s ease}#alron-intro .intro-enter:hover,#alron-intro .intro-enter:focus-visible{border-color:currentColor;letter-spacing:.28em;outline:none}
-#alron-intro .intro-enter span{display:inline-block;margin-left:8px;animation:alronNudge 1.2s ease-in-out 5s infinite}
 #alron-intro.intro-finale{background:#101010;color:#f4f1e9}
 #alron-intro.intro-finale .intro-paper{opacity:0;transition:opacity 1s ease}
 
@@ -1314,7 +1312,6 @@ footer a{color:#ddd}
     </svg>
     <h1 class="intro-name">Artist Alron Lewis</h1>
     <div class="intro-tag">ZERO TO INFINITE <span style="font-size:1.25em">∞</span></div>
-    <button class="intro-enter" type="button" aria-label="Enter my world">ENTER MY WORLD <span>↓</span></button>
   </div>
 </div>
 
@@ -1685,9 +1682,9 @@ footer a{color:#ddd}
   document.addEventListener("pointerdown",resumeAfterGesture,true);
   document.addEventListener("keydown",resumeAfterGesture,true);
   intro.querySelector(".intro-skip").addEventListener("click",function(){ playSfx("enter"); closeIntro(); });
-  intro.querySelector(".intro-enter").addEventListener("click",function(){ playSfx("enter"); closeIntro(); });
-  // Browsers block sound autoplay. Start on the first tap/key and keep the intro open until Enter or Skip.
+  // Let the logo and name finish, then fade automatically; Skip remains available.
   window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
+  window.setTimeout(closeIntro,7600);
 })();
 </script>
 
