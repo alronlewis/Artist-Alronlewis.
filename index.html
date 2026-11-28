@@ -1287,16 +1287,6 @@ footer a{color:#ddd}
 }
 
 </style>
-
-<style id="scroll-brush-reveal">
-/* One shared brush sweep reveals each major section as it enters view */
-.scroll-reveal-target{opacity:0;clip-path:inset(0 0 100% 0);transition:opacity .9s ease,clip-path 1.15s cubic-bezier(.2,.7,.2,1)}
-.scroll-reveal-target.is-brush-revealed{opacity:1;clip-path:inset(0 0 0 0)}
-#scroll-brush{position:fixed;left:-12%;top:0;width:124%;height:18px;z-index:9998;pointer-events:none;opacity:0;transform:translateY(-100px) rotate(-1deg);background:linear-gradient(90deg,transparent,rgba(155,177,194,.28) 12%,rgba(235,242,247,.9) 48%,rgba(166,185,201,.65) 82%,transparent);clip-path:polygon(0 48%,9% 15%,24% 42%,42% 0,61% 31%,78% 8%,100% 43%,96% 68%,76% 55%,58% 100%,37% 62%,17% 83%,0 48%);filter:drop-shadow(0 0 12px rgba(205,224,239,.3));will-change:transform,opacity}
-#scroll-brush.is-active{opacity:1}
-@media(prefers-reduced-motion:reduce){.scroll-reveal-target{opacity:1;clip-path:none;transition:none}#scroll-brush{display:none}}
-</style>
-
 </head>
 <!-- Image Popup -->
 <div id="imagePopup" class="image-popup">
@@ -1695,39 +1685,6 @@ footer a{color:#ddd}
   // Let the logo and name finish, then fade automatically; Skip remains available.
   window.setTimeout(function(){intro.classList.add("intro-finale");},4800);
   window.setTimeout(closeIntro,7600);
-})();
-</script>
-
-
-<script id="scroll-brush-reveal-script">
-(function(){
-  const sections=document.querySelectorAll('.about-section,#achievements,#artwork-for-sale,#gallery,.social-links,footer');
-  if(!sections.length||!('IntersectionObserver' in window))return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const brush=document.createElement('div');brush.id='scroll-brush';brush.setAttribute('aria-hidden','true');document.body.appendChild(brush);
-  let busy=false;
-  function sweep(section){
-    const rect=section.getBoundingClientRect();
-    const y=Math.max(0,Math.min(window.innerHeight-18,rect.top+Math.min(rect.height*.22,window.innerHeight*.28)));
-    brush.classList.add('is-active');
-    brush.style.transition='none';
-    brush.style.transform='translateY('+y+'px) rotate(-1deg)';
-    requestAnimationFrame(function(){
-      brush.style.transition='transform 1.05s cubic-bezier(.2,.65,.25,1),opacity .2s ease';
-      brush.style.transform='translateY('+(y+Math.min(rect.height*.72,window.innerHeight*.68))+'px) rotate(-1deg)';
-    });
-    window.setTimeout(function(){brush.classList.remove('is-active');},1100);
-  }
-  const observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(!entry.isIntersecting)return;
-      const section=entry.target;
-      section.classList.add('is-brush-revealed');
-      sweep(section);
-      observer.unobserve(section);
-    });
-  },{threshold:.08,rootMargin:'0px 0px -8% 0px'});
-  sections.forEach(function(section){section.classList.add('scroll-reveal-target');observer.observe(section);});
 })();
 </script>
 
